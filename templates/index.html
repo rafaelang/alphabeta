@@ -51,61 +51,9 @@
     </head>
     <body>
         <div class="container">
-            <center>
-                <table class="demo">
-                    <tr><td>
-                                        <h1>
-                                    {% for silaba in silabas %}
-                                        <span class="fcor{{loop.index0}}">{{silaba}}</span>
-                                    {% endfor %}
-                                </h1>
-                        </td>
-                        <td>
-                                            <h1 class="cursive">
-                                    {% for silaba in silabas %}
-                                        <span class="fcor{{loop.index0}}">{{silaba}}</span>
-                                    {% endfor %}
-                                </h1>
-                        </td></tr>
-                    <tr><td>
-                                        <h1 class="maiuscula">
-                                        {% for silaba in silabas %}
-                                            <span class="fcor{{loop.index0}}">{{silaba}}</span>
-                                        {% endfor %}
-                                    </h1>
-                        </td>
-                        <td>
-                                            <h1 class="cursive">
-                                        {% for silaba in silabas %}
-                                            <span class="fcor{{loop.index0}} {% if loop.first %}captalize{%endif%}">{{silaba}}</span>
-                                        {% endfor %}
-                                    </h1>
-                        </td></tr>
-                </table>
-                <audio controls>
-                  <source src="/sound/{{song}}" type="audio/mpeg">
-                </audio>
-            </center>
-            <br/>
-            <center>
-                <table>
-                    <tr><td>
-                        <table>
-                            {% for silaba in silabas %}
-                                <tr><th><h2 class="fcor{{loop.index0}}">{{silaba}}</h2></th><td>
-                                    <audio controls>
-                                      <source src="/sound/{{silaba}}.mp3" type="audio/mpeg">
-                                    </audio>
-                                    </td></tr>
-                            {% endfor %}
-                        </table>
-                        </td>
-                        <td>
-                            <!--image-->
-                        </td></tr>
-                </table>
-                <a href="/get/random">Próxima palavra</a>
-            </center>
+		<p class="fcor0"><a href="/ouvir/random">Ouvir</a></p>
+		<p class="fcor1"><a href="/escrever/random">Escrever</a></p>
+		<p class="fcor2"><a href="/junta-silabas/random">Junte as silabas</a></p>
         </div>
     </body>
 </html>

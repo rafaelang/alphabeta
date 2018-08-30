@@ -16,7 +16,9 @@ python alfabeto.py
 ```
 
 
-http://localhost:5000/get/random
+http://localhost:5000/
+
+http://localhost:5000/ouvir/random
 
 http://localhost:5000/escrever/random
 

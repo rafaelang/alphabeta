@@ -22,7 +22,7 @@ palavras += 'escola,mochila,lapis,borracha,apontador,amigo,colega,amiga,professo
 palavras += 'osso,cerebro,perna,braço,corpo,barriga,abdomêm,olho,orelha,ouvido,sobrancelha,nariz,narina,pé,mão,cotovelo,joelho,peito,'
 palavras += 'natação,futebol,volei,praia,surf,handbol,tenis,'
 palavras += 'um,dois,três,quatro,cinco,seis,sete,oite,nove,dez,onze,douze,trezê,quatorze,quinze,dezesseis,dezessete,dezoito,dezenove,vinte,'
-palavras += 'morango,pessego,banana,maracuja,melancia,laranja,uva,goiba,pêra,maçã,acerola,açaí,pitaía,mertilo,kiwi,'
+palavras += 'morango,pessego,banana,maracuja,melancia,laranja,uva,goiba,pêra,maçã,acerola,açaí,pitaía,mertilo,kiwi,limão,'
 palavras += 'beterraba,batata,cenoura,inhame,abobora,tomate,cebola,pimentão,pimenta,azeite,azeitona,'
 palavras += 'ovo,pão,macarrão,arroz,feijão,salsicha,espinafre,alface,milho,pipoca,'
 palavras += 'flôr,rosa,margarida,bromelha,'
@@ -51,10 +51,10 @@ def escrever(palavra):
     return render_template('escrever.html', **resp)
 
 
-@app.route("/get/<path:palavra>")
-def index(palavra):
+@app.route("/ouvir/<path:palavra>")
+def ouvir(palavra):
     resp = base(palavra)
-    return render_template('index.html', **resp)
+    return render_template('ouvir.html', **resp)
     
 @app.route('/sound/<path:path>')
 def get_resource(path):
@@ -69,6 +69,10 @@ def get_resource(path):
     mimetype = mimetypes.get(ext, "text/html")
     content = open(complete_path, 'rb')
     return Response(content, mimetype=mimetype)
+
+@app.route('/')
+def index():
+    return render_template('index.html')
 
 
 def base(palavra):
@@ -85,7 +89,7 @@ def base(palavra):
             tts.save('static/%s.mp3' % silaba)
     resp = {}
     dic = pyphen.Pyphen(lang='pt_BR')
-    busca = requests.get('https://www.google.com.br/search?q=urso&source=lnms&tbm=isch')
+    #busca = requests.get('https://www.google.com.br/search?q=urso&source=lnms&tbm=isch')
     resp['silabas'] = dic.inserted(palavra).split('-')
     resp['song'] = '%s.mp3' % palavra
     resp['palavra'] = palavra
