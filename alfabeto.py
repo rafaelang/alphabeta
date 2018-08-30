@@ -42,7 +42,7 @@ def junta_silaba(palavra):
     dic = pyphen.Pyphen(lang='pt_BR')
     silabas = '-'.join([dic.inserted(pl) for pl in pls]).split('-') + resp['silabas']
     random.shuffle(silabas)
-    resp['silabas_random'] = [x for x in silabas if x]
+    resp['silabas_random'] = [x for x in silabas if x] #palavras compostas com - podem gerar silabas vazias
     return render_template('junta-silabas.html', **resp)
 
 @app.route("/escrever/<path:palavra>")
@@ -82,14 +82,12 @@ def base(palavra):
         tts = gTTS(text=palavra, lang='pt-BR')
         tts.save('static/%s.mp3' % palavra)
     dic = pyphen.Pyphen(lang='pt_BR')
-    silabas = [x for x in dic.inserted(palavra).split('-') if x]
+    silabas = [x for x in dic.inserted(palavra).split('-') if x] # palavras compostas com - podem gerar silabas vazias
     for silaba in silabas:
         if not os.path.exists('static/%s.mp3' % silaba):
             tts = gTTS(text=silaba, lang='pt-BR')
             tts.save('static/%s.mp3' % silaba)
     resp = {}
-    dic = pyphen.Pyphen(lang='pt_BR')
-    #busca = requests.get('https://www.google.com.br/search?q=urso&source=lnms&tbm=isch')
     resp['silabas'] = dic.inserted(palavra).split('-')
     resp['song'] = '%s.mp3' % palavra
     resp['palavra'] = palavra
