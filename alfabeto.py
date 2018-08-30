@@ -7,7 +7,7 @@ from flask import jsonify
 from flask import request
 from flask import Response
 from flask import render_template
-import requests
+
 import random
 from glob import glob
 import itertools
