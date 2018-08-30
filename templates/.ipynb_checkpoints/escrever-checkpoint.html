@@ -1,0 +1,87 @@
+<html>
+    <head>
+        <title>AKAL</title>
+        <link href="https://fonts.googleapis.com/css?family=Parisienne" rel="stylesheet">
+        <style>
+            .container {
+                margin: 0 auto;
+                height: 500px;
+                width:90%;
+                border: solid #000 1px;
+            }
+            .cursive {
+                font-family: 'Parisienne', cursive;
+            }
+            .maiuscula {
+                text-transform: uppercase;
+            }
+            h1 {
+                font-size: 64px;
+                font-family: 'Verdana';
+                margin:0;
+                padding: 50px;
+                line-height: 0px;
+            }
+            .demo td{
+                border: orange 1px dashed;
+            }
+            .captalize {
+                text-transform: capitalize;
+            }
+            input {
+                width:60%;
+                height:90px;
+                font-size:40px;
+                text-align: center;
+                border: orange 1px dashed;
+            }
+        </style>
+        <script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+        <script>
+            function getRandomColor() {
+              var letters = '0123456789ABCDEF';
+              var color = '#';
+              for (var i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+              }
+              return color;
+            }
+            $(document).ready(()=>{
+                for(var i =0; i<=10; i++){
+                    $('.fcor'+i).css({'color': getRandomColor()})
+                }
+                $('#resposta').keyup(()=>{
+                    var text = $('#resposta').val()
+                    var ok = '{{palavra}}'
+                    if(ok==text){
+                        $('#resultado').text('parabéns!!!')
+                    }
+                })
+            })
+        </script>
+    </head>
+    <body>
+        <div class="container">
+            <center>
+                <h1>Escreva a palavra</h1>
+                <audio controls>
+                  <source src="/sound/{{song}}" type="audio/mpeg">
+                </audio>
+                <br/>
+                <input type="text" id="resposta"/>
+                <br/>
+                <h1 id="resultado"></h1>
+            </center>
+            <br/>
+            <center>
+                <a href="/escrever/random">Próxima palavra</a>
+            </center>
+        </div>
+        <p>
+            Com muito amor para Anna Luyza e Anna Karla.
+        </p>
+    </body>
+</html>

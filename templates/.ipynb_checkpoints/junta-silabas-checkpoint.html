@@ -1,0 +1,127 @@
+<html>
+    <head>
+        <title>AKAL</title>
+        <link href="https://fonts.googleapis.com/css?family=Parisienne" rel="stylesheet">
+        <style>
+            .container {
+                margin: 0 auto;
+                height: 500px;
+                width:90%;
+                border: solid #000 1px;
+            }
+            .cursive {
+                font-family: 'Parisienne', cursive;
+            }
+            .maiuscula {
+                text-transform: uppercase;
+            }
+            h1 {
+                font-size: 64px;
+                font-family: 'Verdana';
+                margin:0;
+                padding: 50px;
+                line-height: 0px;
+            }
+            .demo td{
+                border: orange 1px dashed;
+            }
+            .captalize {
+                text-transform: capitalize;
+            }
+            input {
+                width:60%;
+                height:90px;
+                font-size:40px;
+                text-align: center;
+                border: orange 1px dashed;
+            }
+            .silabas {
+                margin: 20px;
+                border: orange 1px dashed;
+                padding: 10px;
+                cursor: pointer;
+            }
+            .taxado {
+                text-decoration: line-through wavy red;
+                color: gray !important;
+            }
+        </style>
+        <script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+        <script>
+            function getRandomColor() {
+              var letters = '0123456789ABCDEF';
+              var color = '#';
+              for (var i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+              }
+              return color;
+            }
+            $(document).ready(()=>{
+                for(var i =0; i<=10; i++){
+                    $('.fcor'+i).css({'color': getRandomColor()})
+                }
+                var resposta = ''
+                var silabas = []
+                var index_resolved = 0
+                {% for silaba in silabas %}
+                silabas.push('{{silaba}}')
+                {% endfor %}
+                var mensagens = ['parabéns!!!', 'muito bom!!', 'bom!!', 'vamos melhorar!']
+                var errors = 0
+                $('.silabas').click(function(){
+                    var ok = '{{palavra}}'
+                    var silaba = $(this)
+                    var value = silaba.attr('data-value')
+                    if(value == silabas[index_resolved]){
+                        index_resolved += 1
+                        resposta += value
+                        silaba.hide()
+                        $('#resposta').text(resposta)
+                    }else {
+                        if(ok.indexOf(value)==-1){
+                            silaba.addClass('taxado')
+                        }
+                        $('#resultado').append('<img  class="error" src="/sound/smile0.jpg" style="width:40px; height:40px;"/>')
+                        errors += 1
+                    }
+                    if(ok==resposta){
+                        $('.error').remove()
+                        var m = errors
+                        m = Math.min(3, m)
+                        $('#resultado').text(mensagens[m])
+                    } 
+                })
+            })
+        </script>
+    </head>
+    <body>
+        <div class="container">
+            <center>
+                <h1>Junte as silabas</h1>
+                <h1 id="resposta"></h1>
+                <br/>
+                <audio controls>
+                  <source src="/sound/{{song}}" type="audio/mpeg">
+                </audio>
+                <br/>
+                <h2>
+                    {% for silaba in silabas_random %}
+                    <span  class="fcor{{loop.index0}} silabas" data-value="{{silaba}}">{{silaba}}</span>
+                    {% endfor %}
+                </h2>
+                <br/>
+                <h1 id="resultado"></h1>
+            </center>
+            <br/>
+            <center>
+                <a href="/junta-silabas/random">Próxima palavra</a>
+            </center>
+        </div>
+        <p>
+            Com muito amor para Anna Luyza e Anna Karla.
+        </p>
+    </body>
+</html>

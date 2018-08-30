@@ -1,0 +1,111 @@
+<html>
+    <head>
+        <title>AKAL</title>
+        <link href="https://fonts.googleapis.com/css?family=Parisienne" rel="stylesheet">
+        <style>
+            .container {
+                margin: 0 auto;
+                height: 500px;
+                width:90%;
+                border: solid #000 1px;
+            }
+            .cursive {
+                font-family: 'Parisienne', cursive;
+            }
+            .maiuscula {
+                text-transform: uppercase;
+            }
+            h1 {
+                font-size: 64px;
+                font-family: 'Verdana';
+                margin:0;
+                padding: 50px;
+                line-height: 0px;
+            }
+            .demo td{
+                border: orange 1px dashed;
+            }
+            .captalize {
+                text-transform: capitalize;
+            }
+        </style>
+        <script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+        <script>
+            function getRandomColor() {
+              var letters = '0123456789ABCDEF';
+              var color = '#';
+              for (var i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+              }
+              return color;
+            }
+            $(document).ready(()=>{
+                for(var i =0; i<=10; i++){
+                    $('.fcor'+i).css({'color': getRandomColor()})
+                }
+            })
+        </script>
+    </head>
+    <body>
+        <div class="container">
+            <center>
+                <table class="demo">
+                    <tr><td>
+                                        <h1>
+                                    {% for silaba in silabas %}
+                                        <span class="fcor{{loop.index0}}">{{silaba}}</span>
+                                    {% endfor %}
+                                </h1>
+                        </td>
+                        <td>
+                                            <h1 class="cursive">
+                                    {% for silaba in silabas %}
+                                        <span class="fcor{{loop.index0}}">{{silaba}}</span>
+                                    {% endfor %}
+                                </h1>
+                        </td></tr>
+                    <tr><td>
+                                        <h1 class="maiuscula">
+                                        {% for silaba in silabas %}
+                                            <span class="fcor{{loop.index0}}">{{silaba}}</span>
+                                        {% endfor %}
+                                    </h1>
+                        </td>
+                        <td>
+                                            <h1 class="cursive">
+                                        {% for silaba in silabas %}
+                                            <span class="fcor{{loop.index0}} {% if loop.first %}captalize{%endif%}">{{silaba}}</span>
+                                        {% endfor %}
+                                    </h1>
+                        </td></tr>
+                </table>
+                <audio controls>
+                  <source src="/sound/{{song}}" type="audio/mpeg">
+                </audio>
+            </center>
+            <br/>
+            <center>
+                <table>
+                    <tr><td>
+                        <table>
+                            {% for silaba in silabas %}
+                                <tr><th><h2 class="fcor{{loop.index0}}">{{silaba}}</h2></th><td>
+                                    <audio controls>
+                                      <source src="/sound/{{silaba}}.mp3" type="audio/mpeg">
+                                    </audio>
+                                    </td></tr>
+                            {% endfor %}
+                        </table>
+                        </td>
+                        <td>
+                            <!--image-->
+                        </td></tr>
+                </table>
+                <a href="/get/random">Próxima palavra</a>
+            </center>
+        </div>
+    </body>
+</html>

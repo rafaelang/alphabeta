@@ -1,0 +1,26 @@
+<html>
+    <head>
+        <style>
+            .container {
+                margin: 0 auto;
+                height: 500px;
+                width:90%;
+                border: solid #000 1px;
+            }
+        </style>
+        <script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <div class="container">
+            <center>
+                <h1>{{silabas[0]}}</h1>
+                <audio controls>
+                  <source src="/sound/{{song}}" type="audio/mpeg">
+                </audio>
+            </center>
+        </div>
+    </body>
+</html>
